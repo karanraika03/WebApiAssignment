@@ -24,7 +24,7 @@ namespace WebApiApp
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
-            var connection = builder.Configuration.GetConnectionString("Default");
+            var connection = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<DataContext>(option => option.UseSqlServer(connection));
 
             builder.Services.AddTransient<IRoleRepository, RoleRepository>();

@@ -1,6 +1,8 @@
 ﻿using WebApiApplication.Employee.Dto;
-
-namespace WebApiApplication.Employee;
+using WebApiData.EmployeeRepo;
+using WebApiData.RoleRepo;
+using WebApiDomain;
+using  WebApiApplication.Employee;
 
 public class EmployeeApplication : IEmployeeApplication
 {
@@ -26,14 +28,18 @@ public class EmployeeApplication : IEmployeeApplication
             throw new Exception("Email Id already Exists");
         }
 
-        var employee = new Employee();
-        employee.Name = input.Name;
-        employee.Email = input.Email;
-        employee.PasswordHash = input.Password;
+       
 
-        employee.CreatedDate = DateTime.Now;
-        employee.RoleId = 2;
-        employee.IsEnabled = true;
+        var employee = new Employee();
+
+        employee.Name = input.Name;
+            employee.Email = input.Email;
+            employee.PasswordHash = input.Password;
+
+            employee.CreatedDate = DateTime.Now;
+            employee.RoleId = 2;
+            employee.IsEnabled = true;
+        
 
         var response = await _employeeRepository.CreateEmployee(employee);
 
