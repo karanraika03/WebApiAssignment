@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApiDomain;
+﻿using WebApiDomain;
 
 namespace WebApiData.RoleRepo;
 
-public class RoleRepository:IRoleRepository
+public class RoleRepository : IRoleRepository
 {
     private readonly DataContext _context;
     public RoleRepository(DataContext context)

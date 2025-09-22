@@ -1,8 +1,8 @@
-﻿using WebApiApplication.Employee.Dto;
+﻿using WebApiApplication.Employee;
+using WebApiApplication.Employee.Dto;
 using WebApiData.EmployeeRepo;
 using WebApiData.RoleRepo;
 using WebApiDomain;
-using  WebApiApplication.Employee;
 
 public class EmployeeApplication : IEmployeeApplication
 {
@@ -28,18 +28,13 @@ public class EmployeeApplication : IEmployeeApplication
             throw new Exception("Email Id already Exists");
         }
 
-       
-
         var employee = new Employee();
-
         employee.Name = input.Name;
-            employee.Email = input.Email;
-            employee.PasswordHash = input.Password;
+        employee.Email = input.Email;
+        employee.PasswordHash = input.Password;
 
-            employee.CreatedDate = DateTime.Now;
-            employee.RoleId = 2;
-            employee.IsEnabled = true;
-        
+        employee.CreatedDate = DateTime.Now;
+        employee.RoleId = 2;
 
         var response = await _employeeRepository.CreateEmployee(employee);
 
@@ -51,7 +46,9 @@ public class EmployeeApplication : IEmployeeApplication
         var user = await _employeeRepository.LoginAsync(dto.Email, dto.Password);
 
         if (user == null)
+        {
             throw new Exception("Invalid username/email or password");
+        }
 
         var role = await _roleRepository.GetById(user.RoleId);
 
@@ -65,4 +62,39 @@ public class EmployeeApplication : IEmployeeApplication
         };
     }
 
+    public async Task<bool> ChangePasswordAsync(int id, ChangePasswordDto dto)
+    {
+        var employee = await _employeeRepository.GetByIdAndPassword(id, dto.OldPassword);
+
+
+        if (employee == null)
+        {
+            throw new Exception("Employee Not Found !");
+        }
+
+
+
+        employee.PasswordHash = dto.NewPassword;
+
+
+        await _employeeRepository.UpdateEmployee(employee);
+
+        return true;
+
+    }
+
+    public async Task<string> ForgetPasswordAsync(string emailId, string ipAddress)
+    {
+        var checkEmployee = await _employeeRepository.GetByEmail(emailId);
+
+        if (checkEmployee == null)
+        {
+            throw new Exception("Email Id not Exists");
+        }
+
+        var code = await _employeeRepository.ResetPasswordCode(emailId, checkEmployee.Id, ipAddress);
+
+        return code;
+
+    }
 }

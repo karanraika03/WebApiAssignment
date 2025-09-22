@@ -1,14 +1,14 @@
-
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
+using WebApiApp.Services;
+using WebApiApplication.Blog;
 using WebApiApplication.Employee;
 using WebApiData;
+using WebApiData.Blog;
 using WebApiData.EmployeeRepo;
 using WebApiData.RoleRepo;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 
 namespace WebApiApp
@@ -30,6 +30,9 @@ namespace WebApiApp
             builder.Services.AddTransient<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IBlogApplication, BlogApplication>();
+            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
 
 
             builder.Services.AddSwaggerGen();

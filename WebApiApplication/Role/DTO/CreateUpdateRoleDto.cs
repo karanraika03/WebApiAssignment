@@ -1,6 +1,6 @@
 ﻿namespace WebApiApplication.Role.DTO;
 
-public class CreateUpdateDto
+public class CreateUpdateRoleDto
 {
     public string Name { get; set; }
 }
