@@ -8,6 +8,7 @@ public interface IEmployeeRepository
     Task<Employee> CreateEmployee(Employee employee);
 
     Task<Employee?> GetByEmail(string email);
+    Task<Employee?> GetById(int id);
 
     Task<Employee?> GetByIdAndPassword(int id, string password);
 
@@ -16,4 +17,7 @@ public interface IEmployeeRepository
     Task<Employee?> LoginAsync(string email, string password);
 
     Task<string> ResetPasswordCode(string emailId, int UserId, string ipAddress);
+    Task<ResetPasswordCode?> ValidateResetPasswordCode(string code);
+
+    Task UpdateResetPasswordCode(ResetPasswordCode input);
 }

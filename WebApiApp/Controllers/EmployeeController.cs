@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -130,7 +129,22 @@ public class EmployeeController : ControllerBase
 
     }
 
+    [HttpPut("reset-password")]
+    public async Task<IActionResult> ResetPassword(ResetPasswordDto input)
+    {
+        try
+        {
+            await _employee.ResetPassword(input);
+            return Ok("reset successfully!");
 
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
+
+    }
 
     [HttpGet("reset-password/{code}")]
     public async Task<IActionResult> ResetPassword(string code)
