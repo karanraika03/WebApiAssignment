@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using WebApiApp.Services;
 using WebApiApplication.Blog;
+using WebApiApplication.Blog.DTO;
 using WebApiApplication.Employee;
 using WebApiData;
 using WebApiData.Blog;

@@ -1,5 +1,6 @@
 ﻿using WebApiApplication.Blog.DTO;
 using WebApiData.Blog;
+using WebApiDomain;
 
 namespace WebApiApplication.Blog;
 
@@ -14,7 +15,7 @@ public class BlogApplication : IBlogApplication
 
     public async Task<BlogDto> CreateBlog(CreateUpdateBlogDto input)
     {
-        var blog = new WebApiDomain.Blog();
+        var blog = new Blogs();
         blog.Title = input.Title;
         blog.Description = input.Description;
         blog.UpdatedDate = DateTime.Now;

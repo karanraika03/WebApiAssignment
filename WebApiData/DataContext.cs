@@ -14,7 +14,7 @@ public class DataContext : DbContext
 
     public DbSet<Employee> Employees { get; set; }
 
-    public DbSet<WebApiDomain.Blog> Blogs { get; set; }
+    public DbSet<WebApiDomain.Blogs> Blogs { get; set; }
 
     public DbSet<ResetPasswordCode> ResetPasswordCodes { get; set; }
 }
