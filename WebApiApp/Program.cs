@@ -1,3 +1,4 @@
+using Application.Roles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -5,7 +6,9 @@ using System.Text;
 using WebApiApp.Services;
 using WebApiApplication.Blog;
 using WebApiApplication.Blog.DTO;
+
 using WebApiApplication.Employee;
+using WebApiApplication.Role;
 using WebApiData;
 using WebApiData.Blog;
 using WebApiData.EmployeeRepo;
@@ -28,12 +31,13 @@ namespace WebApiApp
             var connection = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<DataContext>(option => option.UseSqlServer(connection));
 
+            builder.Services.AddTransient<IRoleApplication, RoleApplication>();
             builder.Services.AddTransient<IRoleRepository, RoleRepository>();
-            builder.Services.AddScoped<IEmployeeApplication, EmployeeApplication>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            builder.Services.AddScoped<IBlogApplication, BlogApplication>();
-            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddTransient<IEmployeeApplication, EmployeeApplication>();
+            builder.Services.AddTransient<IBlogApplication, BlogApplication>();
+            builder.Services.AddTransient<IBlogRepository, BlogRepository>();
+            builder.Services.AddTransient<IEmailService, EmailService>();
 
 
             builder.Services.AddSwaggerGen();

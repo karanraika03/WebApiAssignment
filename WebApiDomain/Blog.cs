@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApiDomain;
 
-public class Blogs
+public class Blog
 {
     [Key]
     public int Id { get; set; }
@@ -18,5 +18,5 @@ public class Blogs
     [ForeignKey("EmployeeId")]
     public int EmployeeId { get; set; }
 
-    public Employee Employee { get; set; }
+    public Employee? Employee { get; set; }
 }

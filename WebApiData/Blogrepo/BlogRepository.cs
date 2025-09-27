@@ -11,7 +11,7 @@ public class BlogRepository : IBlogRepository
         _context = context;
     }
 
-    public async Task<Blogs> CreateBlog(Blogs blog)
+    public async Task<Blog> CreateBlog(Blog blog)
     {
         _context.Blogs.Add(blog);
         await _context.SaveChangesAsync();
@@ -25,12 +25,12 @@ public class BlogRepository : IBlogRepository
         _context.Blogs.Remove(blog);
     }
 
-    public async Task<List<Blogs>> GetAllBlog()
+    public async Task<List<Blog>> GetAllBlog()
     {
         return await _context.Blogs.ToListAsync();
     }
 
-    public async Task<Blogs> GetById(int id)
+    public async Task<Blog> GetById(int id)
     {
         return await _context.Blogs.FindAsync();
     }

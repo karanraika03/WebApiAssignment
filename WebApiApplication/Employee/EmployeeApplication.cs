@@ -9,14 +9,10 @@ public class EmployeeApplication : IEmployeeApplication
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IRoleRepository _roleRepository;
 
-    public EmployeeApplication(IEmployeeRepository employeeRepository,
-        IRoleRepository roleRepository
-         )
+    public EmployeeApplication(IEmployeeRepository employeeRepository, IRoleRepository roleRepository)
     {
         _employeeRepository = employeeRepository;
         _roleRepository = roleRepository;
-
-
     }
 
     public async Task<int> CreateEmployee(CreateEmployeeDto input)
@@ -97,6 +93,7 @@ public class EmployeeApplication : IEmployeeApplication
         return code;
 
     }
+
     public async Task ResetPassword(ResetPasswordDto input)
     {
         var result = await _employeeRepository.ValidateResetPasswordCode(input.Code);

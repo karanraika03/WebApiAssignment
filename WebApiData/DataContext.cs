@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApiDomain;
 
-namespace WebApiData;
+ 
 
 public class DataContext : DbContext
 {
@@ -14,7 +14,7 @@ public class DataContext : DbContext
 
     public DbSet<Employee> Employees { get; set; }
 
-    public DbSet<WebApiDomain.Blogs> Blogs { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
 
     public DbSet<ResetPasswordCode> ResetPasswordCodes { get; set; }
 }
